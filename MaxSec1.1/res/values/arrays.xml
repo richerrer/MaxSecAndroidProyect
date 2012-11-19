@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sounds_items">
+        <item>Out Sound</item>
+        <item>City Alarm</item>
+        <item>Robot Alarm</item>
+        <item>FireTruck Alarm</item>
+        <item>Car Alarm</item>
+    </string-array>
+        
+</resources>
