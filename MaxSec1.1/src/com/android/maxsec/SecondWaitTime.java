@@ -13,8 +13,9 @@ public class SecondWaitTime extends BroadcastReceiver{//SE CREA OTRO RECIEVER DE
 	public void onReceive(Context context, Intent intent) { 
 		
 		if(verificador.equals("fourd")){//MANEJA EL EVENTO PARA PODER CERRAR LA CAMARA DESPUES DE UN LAPSO DE TIEMPO
-			camara.finalizar();
 			
+			camara.lanzarPantallaBloqueo();
+			camara.finalizar();
 		}
 		
 	} 

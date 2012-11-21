@@ -34,9 +34,10 @@ public class Camara extends Activity  {
 		
 		camera = getInstance();
 		preview = new Preview(this,camera);
+		
 		FrameLayout ventana_camara = (FrameLayout)findViewById(R.id.frame);
 		ventana_camara.addView(preview);
-		
+		//this.moveTaskToBack(true);
 		waitTakePhoto();
 		closeCamera();
 		
@@ -113,7 +114,7 @@ public class Camara extends Activity  {
     
     public void waitTakePhoto(){
     	
-    	int segundos = 2;
+    	int segundos = 1;
         
     	FirstWaitTime.setVerificador("third");
     	FirstWaitTime.setActivityCamara(this);
@@ -127,7 +128,7 @@ public class Camara extends Activity  {
     
  public void closeCamera(){
     	
-    	int segundos =3;
+    	int segundos =2;
     	
     	SecondWaitTime.setVerificador("fourd");
     	SecondWaitTime.setActivityCamara(this);
@@ -138,6 +139,15 @@ public class Camara extends Activity  {
    
 		
     }
+ 
+ public void lanzarPantallaBloqueo(){
+	 Password.setVerificador(1);
+	 Intent intent = new Intent(this,Password.class);
+	 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	 intent.putExtra("type_of_sound", "sound");
+	 intent.putExtra("password", "");
+     startActivity(intent);
+ }
  
  public void onBackPressed(){//DESACTIVA EL BOTON DE REGRSO
 		

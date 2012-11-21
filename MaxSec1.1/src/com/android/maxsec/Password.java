@@ -49,11 +49,12 @@ public class Password extends Activity{
 	private EditText clave;
 	private String sound;
 	private static Play play;
+	private static int verificador=0;
 	private String password;
 	
 
 	public void onCreate(Bundle savedInstanceState){
-		int segundos =10;
+		
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.password);
 		
@@ -61,7 +62,17 @@ public class Password extends Activity{
 		getStringSonido();	
 		getPass();
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//DESACTIVA EL BOTON HOME
+		if(verificador ==0){
+			lanzarCamara();
+		}
 		
+    }
+	public void onBackPressed(){//DESACTIVA EL BOTON DE REGRSO
+		
+	}
+	
+	public void lanzarCamara(){
+		int segundos =10;
 		FirstWaitTime.setActivityPassword(this);
 		FirstWaitTime.setVerificador("second");//INDICO QUE REALIZARA LA TAREA NUMERO 2
 		
@@ -69,9 +80,6 @@ public class Password extends Activity{
         Intent intent  = new Intent(this,FirstWaitTime.class);//Creamos un Intent que “apunta” a nuestro BroadcastReceiver
         PendingIntent pIntent = PendingIntent.getBroadcast(this, DEFAULT_KEYS_SHORTCUT, intent,PendingIntent.FLAG_CANCEL_CURRENT);//pasamos el contexto en el que este objeto va a ejecutar la acción de tipo broadcast, 
 		alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() +segundos * 1000, pIntent);
-    }
-	public void onBackPressed(){//DESACTIVA EL BOTON DE REGRSO
-		
 	}
 	
 	public void onAttachedToWindow(){//DESACTIVA EL BOTON DE HOME
@@ -171,6 +179,11 @@ public class Password extends Activity{
 		play = play2;
 	}
 	
+public static void setVerificador(int verificador2) {
+		
+		verificador = verificador2;
+	}
+	
 	class ManejoEventoVerificacion implements OnClickListener{
 		
 		public  String TAG = null;
@@ -192,11 +205,17 @@ public class Password extends Activity{
 		    		 activity_password.finish();	
 		    		 Toast.makeText(activity_password, "ALARMA DESACTIVADA", Toast.LENGTH_SHORT).show();
 		    	 }
-		    	 else{FirstWaitTime.setVerificadorParada(true);//ENVIO TRUE PARA QUE LA CLASE FIRSTWAITTIME NO MAEJE ESTA OPCION
-		    	 activity_password.throwAlarm();
+		    	 else{
+		    		 if(verificador==0){
+		    			 FirstWaitTime.setVerificadorParada(true);//ENVIO TRUE PARA QUE LA CLASE FIRSTWAITTIME NO MAEJE ESTA OPCION
+		    			 activity_password.throwAlarm();
+		    		 }else{
+		    			 clave.setText("");
+		    		 }
+		    	 
 		    	 }
 		    }
-		    if(botonText.equals("cancelar")){
+		    if(botonText.equals("cancelar")&&verificador==0){
 		    	FirstWaitTime.setVerificadorParada(true);//ENVIO TRUE PARA QUE LA CLASE FIRSTWAITTIME NO MAEJE ESTA OPCION
 		    	activity_password.throwAlarm();
 		     }
