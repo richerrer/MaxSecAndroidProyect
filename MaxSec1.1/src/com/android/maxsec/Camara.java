@@ -1,8 +1,12 @@
 package com.android.maxsec;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -11,6 +15,7 @@ import android.content.Intent;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -145,7 +150,7 @@ public class Camara extends Activity  {
 	 Intent intent = new Intent(this,Password.class);
 	 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	 intent.putExtra("type_of_sound", "sound");
-	 intent.putExtra("password", "");
+	 intent.putExtra("password", this.leerArchivo());
      startActivity(intent);
  }
  
@@ -161,6 +166,34 @@ public static Play getPlayActivity(){
 	return play;
 }
  
+public String leerArchivo(){
+	File tarjeta,file;
+	FileReader file_reader;
+	BufferedReader br=null;
+	StringTokenizer token;
+	String linea ,string_mail , string_password=null;
+	
+	tarjeta= Environment.getExternalStorageDirectory();
+    file = new File(tarjeta.getAbsolutePath(),"maxSec.txt");
+	try{
+		
+        file_reader = new FileReader(file);
+        br = new BufferedReader(file_reader);
+        
+        while((linea=br.readLine())!=null){
+        	
+        	token = new StringTokenizer(linea,",");
+        	string_mail=token.nextToken();
+        	string_password = token.nextToken();
+        }
+        br.close();
+        return string_password;
+    }
+	catch(IOException ex){
+		return null;
+	}
+}
+
  
 
 
