@@ -211,9 +211,8 @@ public static void setVerificador(int verificador2) {
 		    			 activity_password.throwAlarm();
 		    		 }else{
 		    			 clave.setText("");
-		    		 }
-		    	 
-		    	 }
+		    			 Toast.makeText(activity_password, "Contraseña Incorrecta", Toast.LENGTH_SHORT).show();
+		    		 }}
 		    }
 		    if(botonText.equals("cancelar")&&verificador==0){
 		    	FirstWaitTime.setVerificadorParada(true);//ENVIO TRUE PARA QUE LA CLASE FIRSTWAITTIME NO MAEJE ESTA OPCION

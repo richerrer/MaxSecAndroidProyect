@@ -29,7 +29,7 @@ public class MySensor implements SensorEventListener{
 		this.context=context;
 		this.play = play;
 		this.sound = sound.getSelectedItem().toString();
-		
+		Password.setVerificador(0);
 		Password.setActivityPlay(play);
 		intent1 = new Intent(context,Password.class);
 		intent1.putExtra("type_of_sound", this.sound);
