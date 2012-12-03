@@ -146,7 +146,7 @@ public class Camara extends Activity  {
     }
  
  public void lanzarPantallaBloqueo(){
-	 Password.setVerificador(1);
+	 Password.setVerificador(0);
 	 Intent intent = new Intent(this,Password.class);
 	 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	 intent.putExtra("type_of_sound", "sound");
